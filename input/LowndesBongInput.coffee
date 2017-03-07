@@ -21,13 +21,13 @@ class cas.LowndesBongInput extends cas.BongInputHelper
         # Up to now the data has been in time-sorted order, however now we attempt to correct "row overlaps", where
         # one bell has struck so late it is in the next change, or vice versa. We want the bells in the same row
         # all together, even if this breaks strike time order.
-        errorCorrectors.push(new RowOverlapCorrector())
+        # errorCorrectors.push(new RowOverlapCorrector())
         # Finally we can look at assigning correct hand/back flags.
-        errorCorrectors.push(new StrokeCorrecter())
+        # errorCorrectors.push(new StrokeCorrecter())
         # But do a final pass to cope with missing or misaligned data, causing a bell to be treated as ringing at the end
         # of a row when it should have been at the other stroke at the start of the next. This also tries to deal with
         # recording where we come in halfway through a change.
-        errorCorrectors.push(new LeadLieCorrector())
+        # errorCorrectors.push(new LeadLieCorrector())
         return errorCorrectors
 
     processLine: (line) ->
@@ -54,5 +54,5 @@ class cas.LowndesBongInput extends cas.BongInputHelper
         @fLastTime = t;
 
         bong = new cas.Bong(b, t + @fHighTime, cas.UNKNOWNSTROKE)
+        @fInputListener.receiveBong(bong)
         @fSeenFirstBong = true
-        return bong
