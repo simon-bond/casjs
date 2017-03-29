@@ -1,12 +1,12 @@
-class RowAccumulator
+class cas.RowAccumulator
 
     @fNBells = 0;
 
     constructor: (pipeline) ->
         @fPipeline = pipeline
         @fData = []
-        @fCurrentRow = new RawRow(true)
-        @fNextRow = new RawRow(false)
+        @fCurrentRow = new cas.RawRow(true)
+        @fNextRow = new cas.RawRow(false)
 
     # Assume error correction has sorted out most problems with input - Bongs in time-sorted order,
     # no sensor echoes, handstroke/backstroke flags correct, or marked as unknown.
@@ -37,10 +37,10 @@ class RowAccumulator
 
     finishRow: ->
         @fNBells = Math.max(@fNBells, @fCurrentRow.getNBells())
-        @fData.add(@fCurrentRow)
+        @fData.push(@fCurrentRow)
         @fCurrentRow = @fNextRow;
-        @fNextRow = new RawRow(!@fCurrentRow.isHandstroke())
-        @fPipeline.rowsAvailable(@fData.size())
+        @fNextRow = new cas.RawRow(!@fCurrentRow.isHandstroke())
+        @fPipeline.rowsAvailable(@fData.length)
 
     isSameStrokeBongs: (b1, b2) ->
         if (b1.stroke is cas.UNKNOWNSTROKE or b2.stroke is cas.UNKNOWNSTROKE)
@@ -55,15 +55,15 @@ class RowAccumulator
         return not row.isHandstroke()
 
     notifyInputComplete: ->
-        @fData.add(@fCurrentRow)
+        @fData.push(@fCurrentRow)
         # Don't add final row if it's a handstroke - stats and rendering can only cope with whole pulls!
         unless @fNextRow.isHandstroke()
-            @fData.add(@fNextRow);
-        @fPipeline.rowsAvailable(@fData.size())
+            @fData.push(@fNextRow);
+        @fPipeline.rowsAvailable(@fData.length)
         @fPipeline.notifyLastRowRung()
 
     getNBells: -> return @fNBells
 
-    size: -> return @fData.size()
+    size: -> return @fData.length
 
     getRow: (i) -> @fData[i]

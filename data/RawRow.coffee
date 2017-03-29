@@ -23,7 +23,7 @@ class cas.RawRow
         else
             for i in [0...@fBells.length]
                 bong = @fBells[i]
-                s += BELL_CHARS.charAt(bong.bell - 1)
+                s += cas.BELL_CHARS.charAt(bong.bell - 1)
                 # Add a stroke indicator if this bell has a different stroke to the row!
                 if (bong.stroke is HANDSTROKE) != @fHandstroke
                     s += if bong.stroke is HANDSTROKE then "h" else "b"
@@ -50,13 +50,13 @@ class cas.RawRow
                 return place
         return -1
 
-    isHandstroke: -> return fHandstroke
+    isHandstroke: -> return @fHandstroke
 
     isMatchingStroke: (bong) ->
         if @isHandstroke()
-            return bong.stroke is HANDSTROKE
+            return bong.stroke is cas.HANDSTROKE
         else
-            return bong.stroke is Bong.BACKSTROKE
+            return bong.stroke is cas.BACKSTROKE
 
     setHandstroke: (handstroke) -> @fHandstroke = handstroke
 

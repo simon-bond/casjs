@@ -20,7 +20,8 @@ class cas.BongInputHelper
 
     isClosed: -> return fClosed
 
-    startLoad: ->
+    startLoad: (pipeline) ->
+        @fInputListener = pipeline
         @processLines()
 
     processLines: ->

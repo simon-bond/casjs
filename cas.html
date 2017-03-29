@@ -9,8 +9,13 @@
         <script src="./input/BongInputHelper.js"></script>
         <script src="./input/LowndesBongInput.js"></script>
 
-        <script type="text/javascript">
+        <script src="./pipeline/RowAccumulator.js"></script>
+        <script src="./pipeline/Pipeline.js"></script>
 
+        <script type="text/javascript">
+            var li = new cas.LowndesBongInput('file:///media/simon/F4BA-0DFD/Ringing/casjs/test.lo', 'test');
+            var pl = new cas.Pipeline(li);
+            pl.start();
         </script>
     </head>
 

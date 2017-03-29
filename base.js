@@ -1,6 +1,6 @@
-window.cas = {};
+cas = {};
 
-window.cas.testInput = "#. Lowndes: Version 2\n\
+cas.testInput = "#. Lowndes: Version 2\n\
 #. Creator: Hawkear Version v754\n\
 #. Tower: OxfordChCh\n\
 #. RingingName: 2017-02-16-C12\n\
@@ -3900,3 +3900,4 @@ B 9 0X7d3a\n\
 B O 0X7dd0\n\
 B E 0X7ec0\n\
 B T 0X7f9c"
+

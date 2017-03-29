@@ -1,4 +1,4 @@
-class Pipeline
+class cas.Pipeline
     @fNRowsAvailable = 0
     @fAllRowsRung = false
 
@@ -18,9 +18,9 @@ class Pipeline
 
     start: ->
         # Set up the error correctors and row accumulator stage.
-        @fErrorCorrectors = fInputStage.getErrorCorrecters()
-        @fRowAccumulator = new RowAccumulator(this)
-        if (not @fErrorCorrectors? or @fErrorCorrectors.size() is 0)
+        @fErrorCorrectors = @fInputStage.getErrorCorrecters()
+        @fRowAccumulator = new cas.RowAccumulator(this)
+        if (not @fErrorCorrectors? or @fErrorCorrectors.length is 0)
             @fFirstErrorCorrecter = @fRowAccumulator
         else
             # Chain error correctors together
@@ -49,7 +49,7 @@ class Pipeline
     # Second stage: receive error-corrected Rows, pass on to the visualiser (if present)
     rowsAvailable: (nrows) ->
         @fNRowsAvailable = nrows
-        @rowSource = getRowSource(nrows)
+        @rowSource = @getRowSource(nrows)
         @fCurrentVisualiser.newRowsAvailable(rowSource) if @fCurrentVisualiser?
 
     #Returns null if input not yet finished.
@@ -57,13 +57,13 @@ class Pipeline
         if @fAllRowsRung then return @getRowSource(@fNRowsAvailable)
         return null
 
-    getRowSource: (nrows) ->
+    getRowSource: (nrows) =>
         return {
             getNRows: -> return nrows
 
-            getRow: (i) -> return @fRowAccumulator.getRow(i)
+            getRow: (i) => return @fRowAccumulator.getRow(i)
 
-            getNBells: -> return if @fRowAccumulator? then @fRowAccumulator.getNBells() else 0
+            getNBells: => return if @fRowAccumulator? then @fRowAccumulator.getNBells() else 0
         }
 
     # Final stage: pass averaged row data to the ui
