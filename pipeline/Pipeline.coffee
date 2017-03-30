@@ -78,7 +78,7 @@ class cas.Pipeline
         existingVisualiserData = @fCurrentVisualiser.getAveragedTouchData()
 
         if (existingVisualiserData.getNRows() > 0)
-            fUI?.loadRows(existingVisualiserData)
+            @fUI?.loadRows(existingVisualiserData)
 
         rowSource = @getRowSource(@fNRowsAvailable)
         @fCurrentVisualiser.newRowsAvailable(rowSource)
@@ -89,7 +89,9 @@ class cas.Pipeline
     setUI: (ui) -> @fUI = ui
 
     newAveragedRowAvailable: ->
-        @fUI.loadRows(@fCurrentVisualiser.getAveragedTouchData());
+        #@fUI.loadRows(@fCurrentVisualiser.getAveragedTouchData())
 
     # Should be called by visualisers when they have sent us the last row.
-    analysisComplete: -> @fUI.visualisationComplete()
+    analysisComplete: ->
+        @fCurrentVisualiser.getAveragedTouchData().outputStats(console.log, true)
+        @fUI.visualisationComplete()

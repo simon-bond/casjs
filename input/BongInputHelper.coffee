@@ -16,9 +16,9 @@ class cas.BongInputHelper
 
     getNBells: -> return @fNBells
 
-    isOpen: -> return fInputListener!=null && !isClosed()
+    isOpen: -> return @fInputListener!=null && !@isClosed()
 
-    isClosed: -> return fClosed
+    isClosed: -> return @fClosed
 
     startLoad: (pipeline) ->
         @fInputListener = pipeline
@@ -40,6 +40,7 @@ class cas.BongInputHelper
             line = line.trim()
             unless @isComment(line)
                 @processLine(line)
+        @fInputListener.notifyInputComplete();
 
     readStrokeCharacter: (stroke) ->
         if stroke is 'H'

@@ -23,11 +23,11 @@ class cas.LowndesBongInput extends cas.BongInputHelper
         # all together, even if this breaks strike time order.
         # errorCorrectors.push(new RowOverlapCorrector())
         # Finally we can look at assigning correct hand/back flags.
-        # errorCorrectors.push(new StrokeCorrecter())
+        errorCorrectors.push(new cas.StrokeCorrecter())
         # But do a final pass to cope with missing or misaligned data, causing a bell to be treated as ringing at the end
         # of a row when it should have been at the other stroke at the start of the next. This also tries to deal with
         # recording where we come in halfway through a change.
-        # errorCorrectors.push(new LeadLieCorrector())
+        # errorCorrectors.push(new cas.LeadLieCorrector())
         return errorCorrectors
 
     processLine: (line) ->

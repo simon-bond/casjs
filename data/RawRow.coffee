@@ -1,5 +1,5 @@
 class cas.RawRow
-    @fNBells : 0
+    fNBells : 0
 
     constructor: (stroke) ->
         @fHandstroke = stroke
@@ -45,9 +45,11 @@ class cas.RawRow
     getLastStrikeTime: -> return @getStrikeTime(@getRowSize())
 
     findBell: (bell) ->
-        for place in [1..@fBells.size()]
+        place = 1
+        while place <= @fBells.length
             if @getBellAt(place) is bell
                 return place
+            place++
         return -1
 
     isHandstroke: -> return @fHandstroke

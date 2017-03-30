@@ -2,9 +2,19 @@
     <head>
         <script src="./base.js"></script>
         <script src="./constants.js"></script>
+
         <script src="./data/RawRow.js"></script>
         <script src="./data/Bong.js"></script>
         <script src="./data/AveragedRow.js"></script>
+        <script src="./data/AveragedRowData.js"></script>
+        <script src="./data/TouchStats.js"></script>
+
+        <script src="./errorcorrection/StrokeCorrector.js"></script>
+        <script src="./errorcorrection/LeadLieCorrector.js"></script>
+
+        <script src="./analyser/VisualiserHelper.js"></script>
+        <script src="./analyser/RodBaseVisualiser.js"></script>
+        <script src="./analyser/RodVisualiser2.js"></script>
 
         <script src="./input/BongInputHelper.js"></script>
         <script src="./input/LowndesBongInput.js"></script>
@@ -16,6 +26,8 @@
             var li = new cas.LowndesBongInput('file:///media/simon/F4BA-0DFD/Ringing/casjs/test.lo', 'test');
             var pl = new cas.Pipeline(li);
             pl.start();
+            var vis = new cas.RodVisualiser2();
+            pl.setVisualiser(vis);
         </script>
     </head>
 

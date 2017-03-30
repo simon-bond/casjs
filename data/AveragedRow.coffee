@@ -1,7 +1,7 @@
 class cas.AveragedRow
     # Good and bad standard deviations, milliseconds accuracy */
-    @GOOD_CUTOFF: 30
-    @BAD_CUTOFF: 60
+    GOOD_CUTOFF: 30
+    BAD_CUTOFF: 60
 
     constructor: (row, endTime, handstrokeGap, duration) ->
         @fRow = row
@@ -21,7 +21,7 @@ class cas.AveragedRow
         n = @getRowSize()
         d = 0.0
         dd = 0.0
-        for i in [0..n]
+        for i in [0...n]
             t = @getStrikeTime(i + 1) - @getCorrectStrikeTime(i + 1)
             d += t * t
             x = Math.round(Math.abs(t) / @GOOD_CUTOFF)
@@ -91,7 +91,7 @@ class cas.AveragedRow
 
     isInChanges: -> return @fInChanges
 
-    setIsInChanges: (inChange) -> @fInChanges = inChanges;
+    setIsInChanges: (inChanges) -> @fInChanges = inChanges;
 
     isCloseToRounds: -> return @fRow.isCloseToRounds()
 

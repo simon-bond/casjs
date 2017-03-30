@@ -1,6 +1,6 @@
 class cas.RowAccumulator
 
-    @fNBells = 0;
+    fNBells: 0;
 
     constructor: (pipeline) ->
         @fPipeline = pipeline
