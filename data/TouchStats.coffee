@@ -53,7 +53,6 @@ class cas.TouchStats
             @_outThree(out, TEXT_SD, @getBellSD(i, inChangesOnly))
             @_outThree(out, TEXT_RMSE, @getBellRMSE(i, inChangesOnly))
             @_outThree(out, TEXT_AV_MS_LATE, @getLateness(i, inChangesOnly))
-        out()
 
     _outThree: (out, text, stats) ->
         out(text + ", " + stats.whole + ", " + stats.hand + ", " + stats.back)

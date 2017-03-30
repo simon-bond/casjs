@@ -1,5 +1,7 @@
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
         <script src="./base.js"></script>
         <script src="./constants.js"></script>
 
@@ -23,15 +25,17 @@
         <script src="./pipeline/Pipeline.js"></script>
 
         <script type="text/javascript">
-            var li = new cas.LowndesBongInput('file:///media/simon/F4BA-0DFD/Ringing/casjs/test.lo', 'test');
-            var pl = new cas.Pipeline(li);
-            pl.start();
-            var vis = new cas.RodVisualiser2();
-            pl.setVisualiser(vis);
+            $(document).ready(function() {
+                var li = new cas.LowndesBongInput('file:///media/simon/F4BA-0DFD/Ringing/casjs/test.lo', 'test');
+                var pl = new cas.Pipeline(li);
+                pl.start();
+                var vis = new cas.RodVisualiser2();
+                pl.setVisualiser(vis);
+            });
         </script>
     </head>
 
     <body>
-        <input type="file" id="files" name="files" />
+        <div id="output" />
     </body>
 </html>
