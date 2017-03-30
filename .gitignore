@@ -1,1 +1,5 @@
-*.js
+/analyser/*.js
+/data/*.js
+/errorcorrection/*.js
+/input/*.js
+/pipeline/*.js
