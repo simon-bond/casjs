@@ -15,13 +15,13 @@ class cas.LowndesBongInput extends cas.BongInputHelper
         # may be sensor artifacts and erros we need to clean up. To deal with these problems, we add lots of
         # error conversion layers, as follows:
         # First, remove any sensor echoes - basically, double strikes of bells.
-        # errorCorrectors.add(new SensorEchoCorrecter());
+        errorCorrectors.push(new cas.SensorEchoCorrecter());
         # We can still have rogue extra strikes of bells in the middle of the change; try and get rid of these next.
-        # errorCorrectors.add(new ExtraneousStrikeCorrector());
+        errorCorrectors.push(new cas.ExtraneousStrikeCorrector());
         # Up to now the data has been in time-sorted order, however now we attempt to correct "row overlaps", where
         # one bell has struck so late it is in the next change, or vice versa. We want the bells in the same row
         # all together, even if this breaks strike time order.
-        # errorCorrectors.push(new RowOverlapCorrector())
+        errorCorrectors.push(new cas.RowOverlapCorrector())
         # Finally we can look at assigning correct hand/back flags.
         errorCorrectors.push(new cas.StrokeCorrecter())
         # But do a final pass to cope with missing or misaligned data, causing a bell to be treated as ringing at the end
