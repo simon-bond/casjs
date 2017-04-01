@@ -99,4 +99,7 @@ class cas.Pipeline
             elem = document.getElementById('output')
             elem.innerHTML += string
             elem.innerHTML += '<br>'
-        @fCurrentVisualiser.getAveragedTouchData().outputStats(outFn, true)
+        data = @fCurrentVisualiser.getAveragedTouchData()
+        data.outputStats(outFn, true)
+        @fUI = new cas.StrikingDisplay()
+        @fUI.doLoadRows(data)
