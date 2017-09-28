@@ -93,10 +93,5 @@ class cas.Pipeline
 
     # Should be called by visualisers when they have sent us the last row.
     analysisComplete: ->
-        # @fUI.visualisationComplete()
-        # HACK
-        outFn = (string) ->
-            elem = document.getElementById('output')
-            elem.innerHTML += string
-            elem.innerHTML += '<br>'
-        @fCurrentVisualiser.getAveragedTouchData().outputStats(outFn, true)
+        @fUI.visualisationComplete()
+        @fUI.loadRows(@fCurrentVisualiser.getAveragedTouchData())

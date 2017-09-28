@@ -24,10 +24,15 @@
         <script src="./lib/pipeline/RowAccumulator.js"></script>
         <script src="./lib/pipeline/Pipeline.js"></script>
 
+        <script src="./lib/ui/StrikingDisplay.js"></script>
+        <script src="./lib/ui/UIWindow.js"></script>
+
         <script type="text/javascript">
             $(document).ready(function() {
                 var li = new cas.LowndesBongInput('file:///media/simon/F4BA-0DFD/Ringing/casjs/test.lo', 'test');
                 var pl = new cas.Pipeline(li);
+                var ui = new cas.UIWindow();
+                pl.setUI(ui);
                 pl.start();
                 var vis = new cas.RodVisualiser2();
                 pl.setVisualiser(vis);
@@ -36,6 +41,8 @@
     </head>
 
     <body>
-        <div id="output" />
+        <div>
+            <canvas id="gridCanvas" width="800px" height="10000"/>
+        </div>
     </body>
 </html>
