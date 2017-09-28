@@ -34,7 +34,7 @@ class cas.StrikingDisplay
         fInterbellGap = 0
 
         @fInChanges = false
-        @fHighlightedBell = 4
+        @fHighlightedBell = 9
 
         @canvas = document.getElementById('gridCanvas')
         @context = @canvas.getContext('2d')
