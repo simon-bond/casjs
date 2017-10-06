@@ -13,9 +13,9 @@
 
         <script src="./lib/errorcorrection/StrokeCorrector.js"></script>
         <script src="./lib/errorcorrection/LeadLieCorrector.js"></script>
-		<script src="./lib/errorcorrection/RowOverlapCorrector.js"></script>
-		<script src="./lib/errorcorrection/ExtraneousStrikeCorrector.js"></script>
-		<script src="./lib/errorcorrection/SensorEchoCorrecter.js"></script>
+        <script src="./lib/errorcorrection/RowOverlapCorrector.js"></script>
+        <script src="./lib/errorcorrection/ExtraneousStrikeCorrector.js"></script>
+        <script src="./lib/errorcorrection/SensorEchoCorrecter.js"></script>
 
         <script src="./lib/analyser/VisualiserHelper.js"></script>
         <script src="./lib/analyser/RodBaseVisualiser.js"></script>
@@ -28,20 +28,64 @@
         <script src="./lib/pipeline/Pipeline.js"></script>
 
         <script src="./lib/ui/StrikingDisplay.js"></script>
+        <script src="./lib/ui/UIWindow.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function() {
-                var li = new cas.LowndesBongInput('file:///media/simon/F4BA-0DFD/Ringing/casjs/test.lo', 'test');
-                var pl = new cas.Pipeline(li);
-                pl.start();
-                var vis = new cas.RodVisualiser2();
-                pl.setVisualiser(vis);
+                var ui;
+                function readSingleFile(e) {
+                    var file = e.target.files[0];
+                    if (!file) { return; }
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var contents = e.target.result;
+                        ui = new cas.UIWindow();
+                        var li = new cas.LowndesBongInput(contents);
+                        var pl = new cas.Pipeline(li);
+                        pl.setUI(ui);
+                        pl.start();
+                        var vis = new cas.RodVisualiser2();
+                        pl.setVisualiser(vis);
+                    };
+                    reader.readAsText(file);
+                    document.getElementById('file-input').style.display = "none";
+                    document.getElementById('select-bell').style.display = "block";
+                }
+
+                document.getElementById('file-input')
+                    .addEventListener('change', readSingleFile);
+                document.getElementById('selected-bell')
+                    .addEventListener('change', function(event) {
+                        ui.setSelectedBell(parseInt(event.target.value));
+                    });
             });
         </script>
     </head>
 
     <body>
-        <div id="output" />
-        <canvas id="canvas"></canvas>
+        <div>
+            <input type="file" id="file-input" />
+            <div id="select-bell" style="display: none">
+                <span>Highlighted bell:</span>
+                <select id="selected-bell">
+                    <option value="0">-</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">0</option>
+                    <option value="11">E</option>
+                    <option value="12">T</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <canvas id="gridCanvas" width="800px" height="10000"/>
+        </div>
     </body>
 </html>

@@ -1,7 +1,7 @@
 class cas.BongInputHelper
 
-    constructor: (name, input) ->
-        @fFilename = name
+    constructor: (input) ->
+        @fInput = input
         @fNBells = -1
 
 
@@ -35,7 +35,7 @@ class cas.BongInputHelper
         #             processLine(line)
         # reader.readAsText(@fFilename)
 
-        lines = cas.testInput.split('\n')
+        lines = @fInput.split('\n')
         for line in lines
             line = line.trim()
             unless @isComment(line)
