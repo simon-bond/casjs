@@ -29,18 +29,52 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
-                var li = new cas.LowndesBongInput('file:///media/simon/F4BA-0DFD/Ringing/casjs/test.lo', 'test');
-                var pl = new cas.Pipeline(li);
                 var ui = new cas.UIWindow();
-                pl.setUI(ui);
-                pl.start();
-                var vis = new cas.RodVisualiser2();
-                pl.setVisualiser(vis);
+                function readSingleFile(e) {
+                    var file = e.target.files[0];
+                    if (!file) { return; }
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var contents = e.target.result;
+                        var li = new cas.LowndesBongInput(contents, 'test');
+                        var pl = new cas.Pipeline(li);
+                        pl.setUI(ui);
+                        pl.start();
+                        var vis = new cas.RodVisualiser2();
+                        pl.setVisualiser(vis);
+                    };
+                    reader.readAsText(file);
+                }
+
+                document.getElementById('file-input')
+                    .addEventListener('change', readSingleFile);
+                document.getElementById('selected-bell')
+                    .addEventListener('change', function(event) {
+                        ui.setSelectedBell(parseInt(event.target.value));
+                    });
             });
         </script>
     </head>
 
     <body>
+        <div>
+            <input type="file" id="file-input" />
+            <select id="selected-bell">
+                <option value="0">-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">0</option>
+                <option value="11">E</option>
+                <option value="12">T</option>
+            </select>
+        </div>
         <div>
             <canvas id="gridCanvas" width="800px" height="10000"/>
         </div>

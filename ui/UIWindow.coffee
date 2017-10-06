@@ -93,3 +93,8 @@ class cas.UIWindow
         s += "</td><td>"
         s += toMilliseconds(stats.back)
         s += "</td></tr>"
+
+    setSelectedBell: (bell) ->
+        @fSelectedBell = bell
+        @fDisplay.setHighlightedBell(bell)
+        @updateBellStats()
