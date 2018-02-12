@@ -11,6 +11,7 @@ class cas.StrikingDisplay
     BACKGROUND_BACKBAD: "rgb(230,207,207)"
     BACKGROUND_HANDGOOD: "rgb(230,245,230)"
     BACKGROUND_BACKGOOD: "rgb(216,230,216)"
+    BLACK: "rgb(0,0,0)"
 
     constructor: ->
         @fRowsLoaded = false
@@ -210,7 +211,7 @@ class cas.StrikingDisplay
                         @drawLine(@fLastCorrectX[@fLastPlace[b-1]], y-@fHeightPerRow*3/2, @fThisCorrectX[j], y-@fHeightPerRow/2, @CORRECT_LINE_COLOUR)
 
                     # Draw lines for each bell, joining up actual strike positions
-                    @drawLine(@fLastActualX[@fLastPlace[b-1]], y-@fHeightPerRow*3/2, @fThisActualX[j], y-@fHeightPerRow/2, @GRID_COLOUR)
+                    @drawLine(@fLastActualX[@fLastPlace[b-1]], y-@fHeightPerRow*3/2, @fThisActualX[j], y-@fHeightPerRow/2, if b is @fHighlightedBell then @BLACK else @GRID_COLOUR)
 
         @fInChanges = row.isInChanges()
         # Loop over row - update previous bell x ordinates (actual and correct) for lines to next row.
