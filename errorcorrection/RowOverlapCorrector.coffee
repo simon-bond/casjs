@@ -20,7 +20,7 @@
 
 class cas.RowOverlapCorrector
     # How many places out of the strict time order a bell is allowed to be moved in order to stay in the "right" row */
-    MAX_OVERLAP = 0
+    MAX_OVERLAP = 1
     LOG_OUTPUT = false
 
     fNBells : 0;
