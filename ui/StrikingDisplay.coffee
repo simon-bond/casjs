@@ -67,6 +67,9 @@ class cas.StrikingDisplay
         # so it is set here to 20 pixels. If you make the title font bigger, this might not be enough!
         @fY0 = 20 + @fHeightPerRow
         @fRowRight = @fWidthPerBell*2 + @fWidthPerBell*@fData.getNBells()
+        
+        @canvas.height = 20 + @fHeightPerRow * @fData.getNRows();
+        
         return true
 
     paintCanvas: ->
